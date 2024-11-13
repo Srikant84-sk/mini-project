@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Books</h2>
+
+<!-- Link to go to Add Book page -->
+<a href="{{ url_for('add_book') }}" class="btn btn-primary mb-4">Add New Book</a>
+<a href="{{ url_for('show_user_records') }}" class="btn btn-secondary mb-4">Go to User Records</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>S.No</th>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Availability</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.sno }}</td>
+            <td>{{ book.bookid }}</td>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ 'Available' if book.availability else 'Not Available' }}</td>
+            <td>
+                <a href="{{ url_for('update_book', sno=book.sno) }}" class="btn btn-sm btn-warning">Edit</a>
+                <form action="{{ url_for('delete_book', sno=book.sno) }}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

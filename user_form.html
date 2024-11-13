@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">{% if user_record %}Edit User Record{% else %}Add User Record{% endif %}</h2>
+
+<form method="post" class="form-group">
+    <label for="userid">User ID:</label>
+    <input type="text" id="userid" name="userid" value="{{ user_record.userid if user_record else '' }}" class="form-control mb-3" required>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ user_record.name if user_record else '' }}" class="form-control mb-3" required>
+
+    <label for="bookid">Book ID:</label>
+    <input type="text" id="bookid" name="bookid" value="{{ user_record.bookid if user_record else '' }}" class="form-control mb-3">
+
+    <label for="contact">Contact:</label>
+    <input type="text" id="contact" name="contact" value="{{ user_record.contact if user_record else '' }}" class="form-control mb-3" required>
+
+    <button type="submit" class="btn btn-success">{% if user_record %}Update{% else %}Add{% endif %} Record</button>
+    <a href="{{ url_for('show_user_records') }}" class="btn btn-secondary">Back to User Records</a>
+</form>
+{% endblock %}

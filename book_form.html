@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{% if book %}Edit Book{% else %}Add Book{% endif %}</h2>
+<form method="post">
+    <label>Book ID:</label>
+    <input type="text" name="bookid" value="{{ book.bookid if book else '' }}" required><br>
+    <label>Title:</label>
+    <input type="text" name="title" value="{{ book.title if book else '' }}" required><br>
+    <label>Author:</label>
+    <input type="text" name="author" value="{{ book.author if book else '' }}" required><br>
+    <label>Availability:</label>
+    <input type="checkbox" name="availability" {% if book and book.availability %}checked{% endif %}><br>
+    <button type="submit">{% if book %}Update{% else %}Add{% endif %}</button>
+</form>
+{% endblock %}
